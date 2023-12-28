@@ -18,8 +18,9 @@ export default function Home() {
        // alignItems="center" // Centraliza verticalmente
         //justifyContent="center" // Centraliza horizontalmente
         //flexDirection={'column'}
+        margin={'50px 10px 10px 10px'}
       >
-        <h1> ola </h1>
+       
         <Layout />
       </Flex>
 

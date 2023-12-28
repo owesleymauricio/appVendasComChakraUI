@@ -1,18 +1,31 @@
+"use client";
+
 import {
     Button,
     Flex,
     FormControl,
     FormLabel,
     Input,
+    Menu,
     Stack,
-    Textarea
+    Textarea,
+    Text
 } from "@chakra-ui/react"
 
+import { MenuNav } from "./menu";
+import { ReactNode} from "react";
 
-export const Layout: React.FC = () => {
+
+interface LayoutProps{
+    titulo?: string;
+    children?: ReactNode;
+}
+
+export const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
+   
     return (
         <Flex>
-            {/*aqui vai ficar o menu*/}
+            <MenuNav />
 
             <Flex
                 flexDirection={'column'}
@@ -20,41 +33,14 @@ export const Layout: React.FC = () => {
                 padding={'10px'}
                 borderRadius={'5px'}
                 borderColor={'gray'}
+                
             >
-                <Flex marginTop={'10px'}> {/* Adicionado um Flex para colocar "Sku" e "Name" lado a lado */}
-                    <FormControl  isRequired w={'300px'} marginRight="2">
-                        <FormLabel>Sku:</FormLabel>
-                        <Input placeholder='sku' />
-                    </FormControl>
-
-                    <FormControl  w={'300px'} isRequired>
-                        <FormLabel>Name:</FormLabel>
-                        <Input placeholder='name' />
-                    </FormControl>
-                </Flex>
-
-                <FormControl marginTop={'20px'} isRequired textAlign={'center'}>
-                    <FormLabel>Price:</FormLabel>
-                    <Input placeholder='price' w={'610px'} />
-                </FormControl>
-
-                <FormControl marginTop={'20px'} isRequired textAlign={'center'}>
-                    <FormLabel>Description:</FormLabel>
-                    <Textarea placeholder='Digite sobre o produto' />
-                </FormControl>
-
-                <Stack 
-                direction='row' 
-                spacing={4} 
-                align='center'
-                marginTop={'20px'}>
-                    <Button colorScheme='teal' variant='solid'>
-                        Submit
-                    </Button>
-                    <Button colorScheme='teal' variant='outline'>
-                        Back
-                    </Button>
-                </Stack>
+                <Text fontFamily={'bold'}
+                fontSize={'40px'}
+                >
+                    {props.titulo}
+                </Text>
+               {props.children}
             </Flex>
         </Flex>
     )
