@@ -1,12 +1,17 @@
 "use client";
 
 import { Layout, InputCommon } from "@/components";
-import { Button, Flex, FormControl, FormLabel, Input, Stack, Textarea } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormLabel, Input, Stack, Textarea, useAccordion } from "@chakra-ui/react";
 import { ChakraProvider } from "@chakra-ui/react"
 import { useState } from "react";
+import { useProdutoService } from "@/app/services";
+import { Produto } from "@/app/models/produtos";
 
 
 export const RegistrationProduct: React.FC = () => {
+
+    const service = useProdutoService();
+
     const [sku, setSku] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [price, setPrice] = useState<string>('');
@@ -14,13 +19,15 @@ export const RegistrationProduct: React.FC = () => {
 
     const handleSubmit = () => {
         const numberPrice = parseFloat(price);
-        const products = {
+
+        const products: Produto = {
             sku: sku,
-            name: name,
+            nameProduto: name,
             price: numberPrice,
-            desc: desc
+            descricao: desc
         }
-        console.log(products)
+        service.salvar(products).then(produtoResposta => 
+            console.log(produtoResposta))
     }
 
     return (
